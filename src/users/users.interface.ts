@@ -12,7 +12,7 @@ export interface IUsersService {
 	findById(id: string): Promise<User>;
 	findOne(query?: FindOptions): Promise<User>;
 	count(query?: FindOptions): Promise<number>;
-	create(comment: UserDto): Promise<User>;
-	update(id: string, comment: UserDto): Promise<User>;
+	create(user: UserDto): Promise<User>;
+	update(id: string, user: UserDto): Promise<User>;
 	destroy(query?: FindOptions): Promise<number>;
 }

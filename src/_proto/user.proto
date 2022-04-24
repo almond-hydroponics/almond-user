@@ -11,9 +11,11 @@ message User {
   string email = 4;
   string password = 5;
   string photo = 6;
-  string createdAt = 7;
-  string updatedAt = 8;
-  int32 version = 9;
+  bool isActive = 7;
+  bool isVerified = 8;
+  string createdAt = 9;
+  string updatedAt = 10;
+  int32 version = 11;
 }
 
 message UserEdge {

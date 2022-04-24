@@ -28,7 +28,7 @@ export class UsersService implements IUsersService {
 		this.logger.info('UsersService#findAll.call %o', query);
 
 		const result: IFindAndPaginateResult<User> =
-			// @ts-expect-error
+			// @ts-expect-error ignore error for now
 			await this.repo.findAndPaginate({
 				...query,
 				raw: true,

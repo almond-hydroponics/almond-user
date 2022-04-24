@@ -17,7 +17,8 @@ const { map } = Aigle;
 @Controller()
 export class UsersController {
 	constructor(
-		@Inject('UsersService') private readonly service: IUsersService,
+		@Inject('UsersService')
+		private readonly service: IUsersService,
 		private readonly logger: PinoLogger,
 	) {
 		logger.setContext(UsersController.name);

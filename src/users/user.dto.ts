@@ -1,23 +1,29 @@
-import { IsEmail, IsString, MinLength } from 'class-validator';
+import { IsEmail, IsString, MinLength, IsBoolean } from 'class-validator';
 
 export class UserDto {
 	readonly id?: string;
 
-  @IsString()
+	@IsString()
 	readonly firstName?: string;
 
-  @IsString()
+	@IsString()
 	readonly lastName?: string;
 
-  @IsEmail()
+	@IsEmail()
 	readonly email?: string;
 
-  @IsString()
-  @MinLength(8)
+	@IsString()
+	@MinLength(8)
 	readonly password?: string;
 
-  @IsString()
-  readonly photo?: string;
+	@IsString()
+	readonly photo?: string;
+
+	@IsBoolean()
+	readonly isVerified?: boolean;
+
+	@IsBoolean()
+	readonly isActive?: boolean;
 
 	readonly createdAt?: string;
 	readonly updatedAt?: string;

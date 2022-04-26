@@ -7,6 +7,7 @@ import { LoggerModule, PinoLogger } from 'nestjs-pino';
 import { SequelizeModule, SequelizeModuleOptions } from '@nestjs/sequelize';
 import { User } from './users/user.model';
 import { Op, OperatorsAliases } from 'sequelize';
+import { DatabaseModule } from './database/database.module';
 
 const operatorsAliases: OperatorsAliases = {
 	_and: Op.and,
@@ -70,35 +71,37 @@ const operatorsAliases: OperatorsAliases = {
 			}),
 			inject: [ConfigService],
 		}),
-		SequelizeModule.forRoot({
-			dialect: 'postgres',
-			host: '0.0.0.0',
-			port: 5432,
-			username: 'postgres',
-			password: 'bhakitamasha',
-			database: 'almond_users',
-			autoLoadModels: true,
-			synchronize: true,
-			retryAttempts: 2,
-			retryDelay: 1000,
-			sync: {
-				force: true,
-			},
-			// logging: (sql) => sequelizeLogger.debug(sql),
-		}),
+		DatabaseModule,
+		// SequelizeModule.forRoot({
+		// 	dialect: 'postgres',
+		// 	host: '0.0.0.0',
+		// 	port: 5432,
+		// 	username: 'postgres',
+		// 	password: 'bhakitamasha',
+		// 	database: 'almond_users',
+		// 	autoLoadModels: true,
+		// 	synchronize: true,
+		// 	retryAttempts: 2,
+		// 	retryDelay: 1000,
+		// 	models: [User],
+		// 	// sync: {
+		// 	// 	force: true,
+		// 	// },
+		// 	// logging: (sql) => sequelizeLogger.debug(sql),
+		// }),
 		// SequelizeModule.forRootAsync({
 		// 	imports: [ConfigModule, LoggerModule],
 		// 	useFactory: async (
 		// 		configService: ConfigService,
-		// 		logger: PinoLogger,
+		// 		// logger: PinoLogger,
 		// 	): Promise<SequelizeModuleOptions> => ({
 		// 		dialect: 'postgres',
 		// 		host: '0.0.0.0',
-		// 		port: 5432,
-		// 		username: 'postgres',
-		// 		password: 'bhakitamasha',
-		// 		database: 'almond_users',
-		// 		logging: logger.info.bind(logger),
+		// 		port: +configService.get<number>('DB_PORT'),
+		// 		username: configService.get<string>('DB_USER'),
+		// 		password: configService.get<string>('DB_PASSWORD'),
+		// 		database: configService.get<string>('DB_NAME'),
+		// 		// logging: logger.info.bind(logger),
 		// 		typeValidation: true,
 		// 		benchmark: true,
 		// 		native: true,
@@ -106,7 +109,7 @@ const operatorsAliases: OperatorsAliases = {
 		// 		operatorsAliases,
 		// 		retryAttempts: 3,
 		// 		retryDelay: 1000,
-		// 		synchronize: configService.get<boolean>('DB_SYNC'),
+		// 		// synchronize: configService.get<boolean>('DB_SYNC'),
 		// 		sync: {
 		// 			force: true,
 		// 		},
@@ -118,7 +121,7 @@ const operatorsAliases: OperatorsAliases = {
 		// 		},
 		// 		models: [User],
 		// 	}),
-		// 	inject: [ConfigService, PinoLogger],
+		// 	inject: [ConfigService],
 		// }),
 		UsersModule,
 	],

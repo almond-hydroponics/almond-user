@@ -1,9 +1,12 @@
-import * as paginate from 'sequelize-cursor-pagination';
+import * as withPagination from 'sequelize-cursor-pagination';
 import { Column, Model, Table, DataType, Index } from 'sequelize-typescript';
 
 @Table({
 	modelName: 'user',
 	tableName: 'users',
+	underscored: true,
+	timestamps: true,
+	version: true,
 })
 export class User extends Model<User> {
 	@Column({
@@ -14,35 +17,35 @@ export class User extends Model<User> {
 	})
 	id: string;
 
-	@Index('user_first_name')
+	// @Index('user_first_name')
 	@Column({
 		type: DataType.STRING,
 		comment: "The user's first name.",
 	})
 	firstName: string;
 
-	@Index('user_last_name')
+	// @Index('user_last_name')
 	@Column({
 		type: DataType.STRING,
 		comment: "The user's last name.",
 	})
 	lastName: string;
 
-	@Index('user_email')
+	// @Index('user_email')
 	@Column({
 		type: DataType.STRING,
 		comment: "The user's email.",
 	})
 	email: string;
 
-	@Index('user_password')
+	// @Index('user_password')
 	@Column({
 		type: DataType.STRING,
 		comment: "The user's password.",
 	})
 	password: string;
 
-	@Index('user_photo')
+	// @Index('user_photo')
 	@Column({
 		type: DataType.STRING,
 		comment: "The user's photo.",
@@ -51,22 +54,24 @@ export class User extends Model<User> {
 	})
 	photo: string;
 
-	@Index('user_is_verified')
+	// @Index('user_is_verified')
 	@Column({
 		type: DataType.BOOLEAN,
 		comment: "The user's verification.",
+		defaultValue: false,
 	})
 	isVerified: boolean;
 
-	@Index('user_is_active')
+	// @Index('user_is_active')
 	@Column({
 		type: DataType.BOOLEAN,
 		comment: "The user's activeness.",
+		defaultValue: false,
 	})
 	isActive: boolean;
 }
 
-paginate({
+withPagination({
 	methodName: 'findAndPaginate',
 	primaryKeyField: 'id',
 })(User);

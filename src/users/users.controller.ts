@@ -28,7 +28,7 @@ export class UsersController {
 	async find(query: IQuery): Promise<IFindPayload<User>> {
 		this.logger.info('UsersController#findAll.call %o', query);
 
-		const { results, cursors } = await this.service.find({
+		const { edges, pageInfo, totalCount } = await this.service.find({
 			attributes: !isEmpty(query.select)
 				? ['id'].concat(query.select)
 				: undefined,
@@ -40,16 +40,9 @@ export class UsersController {
 		});
 
 		const result: IFindPayload<User> = {
-			edges: await map(results, async (comment: User) => ({
-				node: comment,
-				cursor: Buffer.from(JSON.stringify([comment.id])).toString('base64'),
-			})),
-			pageInfo: {
-				startCursor: cursors.before || '',
-				endCursor: cursors.after || '',
-				hasNextPage: cursors.hasNext || false,
-				hasPreviousPage: cursors.hasPrevious || false,
-			},
+			totalCount,
+			edges,
+			pageInfo,
 		};
 
 		this.logger.info('UsersController#findAll.result %o', result);

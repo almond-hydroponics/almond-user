@@ -1,6 +1,6 @@
 import { isEmpty } from 'lodash';
 import { PinoLogger } from 'nestjs-pino';
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { FindOptions } from 'sequelize/types';
 import { InjectModel } from '@nestjs/sequelize';
 
@@ -16,7 +16,7 @@ import { UserDto } from './user.dto';
 @Injectable()
 export class UsersService implements IUsersService {
 	constructor(
-		@InjectModel(User) private readonly repo: typeof User,
+		@Inject('UsersRepository') private readonly repo: typeof User,
 		private readonly logger: PinoLogger,
 	) {
 		logger.setContext(UsersService.name);

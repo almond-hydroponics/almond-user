@@ -11,6 +11,7 @@ export interface IPageInfo {
 }
 
 export interface IFindPayload<T> {
+	totalCount: number;
 	edges: IEdge<T>[];
 	pageInfo: IPageInfo;
 }

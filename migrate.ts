@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 import * as childProcess from "child_process";
-import * as Promise from "bluebird";
+import * as PromiseBluebird from "bluebird";
 import { Sequelize } from "sequelize-typescript";
 import { SequelizeStorage } from "umzug";
 
@@ -83,7 +83,7 @@ const cmdMigrate = async () => {
 const cmdMigrateNext = () => {
   return umzug.pending().then(pending => {
     if (pending.length === 0) {
-      return Promise.reject(new Error("No pending migrations"));
+      return PromiseBluebird.reject(new Error("No pending migrations"));
     }
     const next = pending[0].name;
     return umzug.up({ to: next });
@@ -97,7 +97,7 @@ const cmdReset = () => {
 const cmdResetPrev = () => {
   return umzug.executed().then(executed => {
     if (executed.length === 0) {
-      return Promise.reject(new Error("Already at initial state"));
+      return PromiseBluebird.reject(new Error("Already at initial state"));
     }
 
     const prev = executed[executed.length - 1].name;
@@ -107,7 +107,7 @@ const cmdResetPrev = () => {
 };
 
 const cmdHardReset = () => {
-  return new Promise((resolve, reject) => {
+  return new PromiseBluebird((resolve, reject) => {
     setImmediate(() => {
       try {
         console.log(`dropdb ${DB_NAME}`);
@@ -186,6 +186,6 @@ executedCmd
     if (cmd !== "status" && cmd !== "reset-hard") {
       return cmdStatus();
     }
-    return Promise.resolve();
+    return PromiseBluebird.resolve();
   })
   .then(() => process.exit(0));

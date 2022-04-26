@@ -1,4 +1,5 @@
 import { WhereOptions, FindAttributeOptions } from 'sequelize/types';
+import { IEdge, IPageInfo } from './cursor-pagination.interface';
 
 export interface IFindAndPaginateOptions {
 	attributes: FindAttributeOptions;
@@ -17,6 +18,7 @@ export interface ICursor {
 }
 
 export interface IFindAndPaginateResult<T> {
-	results: T[];
-	cursors: ICursor;
+	totalCount: number;
+	edges: IEdge<T>[];
+	pageInfo: IPageInfo;
 }

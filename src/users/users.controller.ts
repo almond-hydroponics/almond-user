@@ -58,7 +58,7 @@ export class UsersController {
 
 		this.logger.info('UsersController#findById.result %o', result);
 
-		if (isEmpty(result)) throw new Error('Record not found.');
+		if (isEmpty(result)) throw new Error('User record not found.');
 
 		return result;
 	}
@@ -74,7 +74,7 @@ export class UsersController {
 
 		this.logger.info('UsersController#findOne.result %o', result);
 
-		if (isEmpty(result)) throw new Error('Record not found.');
+		if (isEmpty(result)) throw new Error('User record not found.');
 
 		return result;
 	}

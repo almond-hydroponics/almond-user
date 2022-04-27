@@ -17,35 +17,30 @@ export class User extends Model<User> {
 	})
 	id: string;
 
-	// @Index('user_first_name')
 	@Column({
 		type: DataType.STRING,
 		comment: "The user's first name.",
 	})
 	firstName: string;
 
-	// @Index('user_last_name')
 	@Column({
 		type: DataType.STRING,
 		comment: "The user's last name.",
 	})
 	lastName: string;
 
-	// @Index('user_email')
 	@Column({
 		type: DataType.STRING,
 		comment: "The user's email.",
 	})
 	email: string;
 
-	// @Index('user_password')
 	@Column({
 		type: DataType.STRING,
 		comment: "The user's password.",
 	})
 	password: string;
 
-	// @Index('user_photo')
 	@Column({
 		type: DataType.STRING,
 		comment: "The user's photo.",
@@ -54,7 +49,6 @@ export class User extends Model<User> {
 	})
 	photo: string;
 
-	// @Index('user_is_verified')
 	@Column({
 		type: DataType.BOOLEAN,
 		comment: "The user's verification.",
@@ -62,7 +56,6 @@ export class User extends Model<User> {
 	})
 	isVerified: boolean;
 
-	// @Index('user_is_active')
 	@Column({
 		type: DataType.BOOLEAN,
 		comment: "The user's activeness.",

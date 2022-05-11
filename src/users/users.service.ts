@@ -1,8 +1,7 @@
 import { isEmpty } from 'lodash';
 import { PinoLogger } from 'nestjs-pino';
-import { Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { FindOptions } from 'sequelize/types';
-import { InjectModel } from '@nestjs/sequelize';
 
 import { IUsersService } from './users.interface';
 import {
@@ -25,19 +24,24 @@ export class UsersService implements IUsersService {
 	async find(
 		query?: IFindAndPaginateOptions,
 	): Promise<IFindAndPaginateResult<User>> {
-		this.logger.info('UsersService#findAll.call %o', query);
+		try {
+			this.logger.info('UsersService#findAll.call %o', query);
 
-		const result: IFindAndPaginateResult<User> =
-			// @ts-expect-error ignore error for now
-			await this.repo.findAndPaginate({
-				...query,
-				raw: true,
-				paranoid: false,
-			});
+			const result: IFindAndPaginateResult<User> =
+				// @ts-expect-error ignore error for now
+				await this.repo.findAndPaginate({
+					...query,
+					attributes: { exclude: ['password'] },
+					raw: true,
+					paranoid: false,
+				});
 
-		this.logger.info('UsersService#findAll.result %o', result);
+			this.logger.info('UsersService#findAll.result %o', result);
 
-		return result;
+			return result;
+		} catch (e) {
+			throw new BadRequestException();
+		}
 	}
 
 	async findById(id: string): Promise<User> {

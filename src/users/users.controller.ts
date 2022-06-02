@@ -1,16 +1,14 @@
-import Aigle from 'aigle';
-
-import { PinoLogger } from 'nestjs-pino';
 import { Controller, Inject } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
+import Aigle from 'aigle';
 import { isEmpty, isNil } from 'lodash';
+import { PinoLogger } from 'nestjs-pino';
 
 import { ICount, IQuery } from '../commons/commons.interface';
-import { IUsersService } from './users.interface';
 import { IFindPayload } from '../commons/cursor-pagination.interface';
-
-import { User } from './user.model';
 import { UserDto } from './user.dto';
+import { User } from './user.model';
+import { IUsersService } from './users.interface';
 
 const { map } = Aigle;
 

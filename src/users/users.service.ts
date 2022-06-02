@@ -1,16 +1,15 @@
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { isEmpty } from 'lodash';
 import { PinoLogger } from 'nestjs-pino';
-import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { FindOptions } from 'sequelize/types';
 
-import { IUsersService } from './users.interface';
 import {
 	IFindAndPaginateOptions,
 	IFindAndPaginateResult,
 } from '../commons/find-and-paginate.interface';
-
-import { User } from './user.model';
 import { UserDto } from './user.dto';
+import { User } from './user.model';
+import { IUsersService } from './users.interface';
 
 @Injectable()
 export class UsersService implements IUsersService {

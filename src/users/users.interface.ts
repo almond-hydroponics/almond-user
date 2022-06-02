@@ -1,11 +1,11 @@
 import { FindOptions } from 'sequelize/types';
 
-import { User } from './user.model';
-import { UserDto } from './user.dto';
 import {
 	IFindAndPaginateOptions,
 	IFindAndPaginateResult,
 } from '../commons/find-and-paginate.interface';
+import { UserDto } from './user.dto';
+import { User } from './user.model';
 
 export interface IUsersService {
 	find(query?: IFindAndPaginateOptions): Promise<IFindAndPaginateResult<User>>;
